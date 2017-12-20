@@ -1,0 +1,14 @@
+version: '2'
+services:
+    ativ3-app:
+        image: ativ3
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:mysql://ativ3-mysql:3306/ativ3?useUnicode=true&characterEncoding=utf8&useSSL=false
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+        ports:
+            - 8080:8080
+    ativ3-mysql:
+        extends:
+            file: mysql.yml
+            service: ativ3-mysql
