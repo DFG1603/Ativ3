@@ -1,0 +1,101 @@
+
+
+entity Permissao {
+	tipo Long,
+	tempo String,
+	
+}
+
+entity Usuario {
+	nome String,
+    iduser Int,
+        
+}
+
+entity Pessoa {
+	nome String,
+    idPessoa  Int,
+}
+
+entity Aluno {
+    nome String,
+    idAluno Int,
+	
+}
+
+entity Professor {
+	nome String,
+    idProfessor Int,
+}
+entity Disciplina {
+	nome String,
+    idDisciplina Int, 
+}
+entity Turma {
+	codigo Disciplina, 
+    idTurma Int, 
+}
+entity Nota {
+	notaAtvidade Int,
+    notaAluno Int
+    
+}
+
+entity Falta {
+	faltaAula Int,
+    faltaAluno Int, 
+    faltaPeriodo Int, 
+}
+
+entity Aula {
+    aulaPeriodo Int, 
+    aulaTurma Int, 
+    aulaFalta Int,
+}
+
+entity Atividade {
+	atividadeDisc String
+    atividadeProf String, 
+    atividadeNota Int,
+    atividadeEntrega Int,
+}
+
+entity Entrega {
+	entregaAtividade String, 
+    entregaAluno String, 
+}
+
+entity PeriodoLetivo {
+	periodoAula String, 
+    periodoFalta Int,
+}
+
+relationship OneToOne {
+	Usuario{} to Pessoa{}
+}
+
+relationship ManyToOne {
+	Aluno {} to Pessoa{}
+    Professor{} to Pessoa{}
+    Usuario{} to Permissao{}
+    Falta{} to PeriodoLetivo{}
+    Falta{} to Aula{}
+    Turma{} to Professor{}
+}
+
+relationship ManyToMany {
+	Professor{} to Disciplina{}
+}
+
+relationship OneToMany {
+	Disciplina{} to Atividade{}
+    Atividade{} to Entrega{}
+    Aluno{} to Entrega{}
+    Aluno{} to Falta{}
+    Nota{} to Aluno{}
+    Turma{} to Aluno{}
+    Turma{} to Professor{}
+    PeriodoLetivo{} to Aula{}
+}
+
+
